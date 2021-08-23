@@ -4,8 +4,16 @@
   * Body
   * Exception
   * Status code
+* Security
+  * Authentication filter
+  * Token switch to subject
+* Logging
+  * log format
+  * log level
+  * log file
 * Common Utils
   * verification code
   * upload and download
   * zip
   * codec
+  * spring application context
