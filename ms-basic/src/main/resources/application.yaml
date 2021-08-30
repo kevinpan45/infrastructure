@@ -1,0 +1,5 @@
+minio:
+    endpoint: http://localhost:8989
+    access-key: access
+    secret-key: secret
+    expires: 10

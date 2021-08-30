@@ -9,36 +9,39 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import io.kp45.exception.BizRuntimeException;
+import io.kp45.exception.BasicRuntimeException;
+import io.kp45.web.ApiResponse;
 
 @ControllerAdvice
 public class GlobalApiExceptionAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<String> handleReqParamError() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing request parameter or spec error.");
+    public ResponseEntity<ApiResponse<String>> handleReqParamError() {
+        ApiResponse<String> body = ApiResponse.error("Missing request parameter or spec error.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleHttpMessageNotReadableException() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Request parameter parse error.");
+    public ResponseEntity<ApiResponse<String>> handleHttpMessageNotReadableException() {
+        ApiResponse<String> body = ApiResponse.error("Request parameter parse error.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
     @ExceptionHandler(MultipartException.class)
-    public ResponseEntity<String> handleMultipartException() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File upload error.");
+    public ResponseEntity<ApiResponse<String>> handleMultipartException() {
+        ApiResponse<String> body = ApiResponse.error("File upload error.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-    @ExceptionHandler(BizRuntimeException.class)
-    public ResponseEntity<ApiResponse<String>> handleBizError(BizRuntimeException e) {
-        ApiResponse<String> body = new ApiResponse<>();
-        body.setCode("400");
-        body.setMsg(e.getMessage());
+    @ExceptionHandler(BasicRuntimeException.class)
+    public ResponseEntity<ApiResponse<String>> handleBizError(BasicRuntimeException e) {
+        ApiResponse<String> body = ApiResponse.error(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleServerError() {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE.value()).body("System Internal error.");
+    public ResponseEntity<ApiResponse<String>> handleServerError() {
+        ApiResponse<String> body = ApiResponse.error(500, "System Internal error.");
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE.value()).body(body);
     }
 }
