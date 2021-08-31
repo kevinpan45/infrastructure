@@ -48,6 +48,16 @@
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
 
+    <!-- Observability -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+
     <!-- Security -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -135,6 +145,13 @@
       <artifactId>minio</artifactId>
       <version>8.3.0</version>
     </dependency>
+    <!-- Unsupported OkHttp library found. Must use okhttp >= 4.8.1 -->
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>4.9.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>

@@ -43,11 +43,10 @@ public class OssMinIoClient implements InitializingBean {
         authenticate();
     }
 
-    public void authenticate() {
-        synchronized (minioClient) {
-            this.minioClient = MinioClient.builder().endpoint(props.getEndpoint())
-                    .credentials(props.getAccessKey(), props.getSecretKey()).build();
-        }
+    public synchronized void authenticate() {
+        this.minioClient = MinioClient.builder().endpoint(props.getEndpoint())
+                .credentials(props.getAccessKey(), props.getSecretKey()).build();
+        log.info("Connected to MinIO OSS server {}", props.getEndpoint());
     }
 
     public String upload(String bucketName, String objectName, MultipartFile multipartFile) {

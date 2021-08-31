@@ -17,3 +17,8 @@
   * zip
   * codec
   * spring application context
+* Observability
+  * Database connection pool metrics
+  * Springboot metrics
+  * System load
+  * RPC metrics
