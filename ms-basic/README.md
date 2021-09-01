@@ -1,24 +1,25 @@
 # Spec
 * Response
-  * Content-type
-  * Body
-  * Exception
-  * Status code
+  * [x] Content-type
+  * [x] Body
+  * [x] Exception
+  * [x] Status code
 * Security
-  * Authentication filter
-  * Token switch to subject
+  * [ ] Authentication filter
+  * [ ] Token switch to subject
 * Logging
-  * log format
-  * log level
-  * log file
+  * [x] log format
+  * [x] log level
+  * [x] log file
 * Common Utils
-  * verification code
-  * upload and download
-  * zip
-  * codec
-  * spring application context
+  * [ ] verification code
+  * [x] upload and download
+  * [ ] zip
+  * [ ] codec
+  * [ ] spring application context
 * Observability
-  * Database connection pool metrics
-  * Springboot metrics
-  * System load
-  * RPC metrics
+  * [ ] Database connection pool metrics
+  * [ ] Springboot metrics
+  * [ ] System load
+  * [ ] RPC metrics
+  * [ ] log

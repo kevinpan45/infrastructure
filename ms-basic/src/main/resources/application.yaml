@@ -1,9 +1,20 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/${spring.application.name}
+    url: jdbc:mysql://localhost:3306/${spring.application.name}?createDatabaseIfNotExist=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
+  flyway:
+    baseline-on-migrate: true
+    clean-disabled: true
+    enabled: true
+logging:
+  level:
+    root: WARN
+  file:
+    name: app.log
+    max-size: 10MB
+    max-history: 10
 management:
   endpoints:
     web:
