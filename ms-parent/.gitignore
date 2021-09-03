@@ -4,3 +4,4 @@ target
 .classpath
 .project
 .apt_genterated_tests
+.factorypath

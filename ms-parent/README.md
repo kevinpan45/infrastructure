@@ -9,3 +9,20 @@
 * ORM: Mybatis-Plus
 * Util: hutool
 * Test: JUnit
+
+## Build & Deploy
+[Sonatype offical doc](https://central.sonatype.org/publish/publish-maven/)
+### Snapshot version
+
+```
+mvn clean deploy
+```
+### Release version
+```
+mvn clean deploy -P release
+```
+
+If occurs error "gpg: signing failed: Inappropriate ioctl for device" when build, execute command
+```
+export GPG_TTY=$(tty)
+```
