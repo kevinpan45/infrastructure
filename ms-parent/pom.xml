@@ -12,7 +12,7 @@
   </parent>
   <groupId>io.github.kevinpan45</groupId>
   <artifactId>ms-parent</artifactId>
-  <version>0.0.1.1-SNAPSHOT</version>
+  <version>0.0.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
@@ -94,6 +94,16 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- Spring Security Resource Server -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-resource-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-jose</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
@@ -144,7 +154,7 @@
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>5.2.4</version>
+      <version>7.15.0</version>
     </dependency>
     <!-- Database connection pool -->
     <dependency>
