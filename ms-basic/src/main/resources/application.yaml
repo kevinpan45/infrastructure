@@ -1,13 +1,20 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:kp45_public.pem
+          jws-algorithm: RS512
+          # issuer-uri: https://idp.example.com/issuer
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/${spring.application.name}?createDatabaseIfNotExist=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
   flyway:
+    enabled: false
     baseline-on-migrate: true
     clean-disabled: true
-    enabled: true
 logging:
   level:
     root: WARN
@@ -23,7 +30,8 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-minio:
+oss:
+  minio:
     endpoint: http://localhost:8989
     access-key: access
     secret-key: secret

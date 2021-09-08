@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "minio")
+@ConfigurationProperties(prefix = "oss.minio")
 public class MinIoProperties {
     private String endpoint;
     private String accessKey;
