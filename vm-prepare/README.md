@@ -14,6 +14,7 @@ kubectl get svc -n kubernetes-dashboard
 ```
 
 get service kubernetes-dashboard port after command 'kubectl get svc -n kubernetes-dashboard' executed.
+  
 See https://blog.csdn.net/kaikai0720/article/details/107011937
 
 ## Install Helm
