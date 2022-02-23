@@ -37,8 +37,18 @@
 * How to use springboot lifecycle events
 * How to implement restful API
 * How to validate request parameter
+* How to process upload file
 * How to get authentication and authorization info
 * How to handle exception
+* How to use MyBatis-Plus
+  * ORM
+  * SQL
 * How to use flyway to manage database version
-* How to invoke a RPC(feign or grpc) call
+* How to invoke a RPC call
+  * Feign
+  * GRpc
+  * HTTP client
+* How to use middleware
+  * Redis
+  * Kafka
 * How to close springboot application
