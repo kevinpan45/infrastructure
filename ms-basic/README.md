@@ -18,6 +18,7 @@
   * Exception
   * Status code
 * Security
+  * WAF/SQL Firewall/Malware Check
   * Authentication filter
   * Token switch to subject
 * Logging
