@@ -52,4 +52,5 @@
 * How to use middleware
   * Redis
   * Kafka
+* How to schedule a task
 * How to close springboot application
