@@ -34,7 +34,9 @@
 
 # Guideline
 * How to create a springboot project
-* How to use config springboot project property
+* How to use config and use springboot project property
+  * Define a variable
+  * @Configuration annotation
 * How to use springboot lifecycle events
 * How to implement restful API
 * How to validate request parameter
