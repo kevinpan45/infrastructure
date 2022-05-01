@@ -19,7 +19,8 @@
 		"vscjava.vscode-java-pack",
 		"alefragnani.Bookmarks",
 		"GitHub.copilot",
-		"richardwillis.vscode-gradle-extension-pack"
+		"richardwillis.vscode-gradle-extension-pack",
+		"GabrielBB.vscode-lombok"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
