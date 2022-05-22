@@ -94,6 +94,13 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- Spring Security OAuth2 Authorization Server -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-authorization-server</artifactId>
+      <version>0.2.3</version>
+    </dependency>
+
     <!-- Spring Security Resource Server -->
     <dependency>
       <groupId>org.springframework.security</groupId>
