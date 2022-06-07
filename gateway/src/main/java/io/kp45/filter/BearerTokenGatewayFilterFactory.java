@@ -46,7 +46,7 @@ public class BearerTokenGatewayFilterFactory extends AbstractGatewayFilterFactor
                                 exchange.getAttributes().put(REFRESH_TOKEN_VALUE, true);
                                 return chain.filter(exchange);
                             }))
-                    .onErrorResume(BadJwtException.class,
+                    .onErrorResume(JwtException.class,
                             (ex) -> this.onAuthenticationFailure(exchange))
                     .onErrorResume(AuthenticationException.class,
                             (ex) -> this.onAuthenticationFailure(exchange));
