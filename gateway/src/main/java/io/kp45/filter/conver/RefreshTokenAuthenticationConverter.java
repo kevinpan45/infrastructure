@@ -14,7 +14,7 @@ public class RefreshTokenAuthenticationConverter implements ServerAuthentication
     public Mono<String> convert(ServerWebExchange exchange) {
         return Mono.fromCallable(() -> token(exchange.getRequest())).map((token) -> {
             if (token.isEmpty()) {
-                throw new OAuth2AuthenticationException("Not Found Refresh Token");
+                throw new OAuth2AuthenticationException("Not Found Refresh Token From Cookie");
             }
             return token;
         });

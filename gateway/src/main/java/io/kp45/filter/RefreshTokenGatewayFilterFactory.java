@@ -4,10 +4,12 @@ import io.kp45.filter.conver.RefreshTokenAuthenticationConverter;
 import io.kp45.filter.conver.ServerAuthenticationConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ReactiveHttpInputMessage;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -58,15 +60,22 @@ public class RefreshTokenGatewayFilterFactory extends AbstractGatewayFilterFacto
                                 .exchange()
                                 .flatMap((response) -> this.readTokenResponse(response))
                                 .onErrorMap((ex) -> new OAuth2AuthenticationException(ex.getMessage())))
-                        .switchIfEmpty(Mono.error(() -> new OAuth2AuthenticationException("")))
-                        .flatMap((tokenResponse) -> {
-                            this.withBearerHeader(exchange, tokenResponse);
-                            return chain.filter(exchange);
-                        })
+                        .flatMap((tokenResponse) -> this.onAuthenticationSuccess(tokenResponse, chain, exchange))
                         .onErrorResume(AuthenticationException.class, (ex) -> this.onAuthenticationFailure(exchange));
             }
             return chain.filter(exchange);
         };
+    }
+
+    protected Mono<Void> onAuthenticationSuccess(Map<String, Object> tokenResponse, GatewayFilterChain chain, ServerWebExchange exchange) {
+        exchange.mutate().request((r) -> {
+            r.headers((headers) -> {
+                headers.setBearerAuth((String) tokenResponse.get("access_token"));
+            });
+        }).build();
+        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+            this.refreshTokenCookies(exchange, tokenResponse);
+        }));
     }
 
     protected Mono<Void> onAuthenticationFailure(ServerWebExchange exchange) {
@@ -93,13 +102,18 @@ public class RefreshTokenGatewayFilterFactory extends AbstractGatewayFilterFacto
         return response.body(this.bodyExtractor);
     }
 
-    protected void withBearerHeader(ServerWebExchange exchange, Map<String, Object> tokenResponse) {
-        exchange.mutate().request((r) -> {
-            r.headers((headers) -> {
-                headers.setBearerAuth((String) tokenResponse.get("access_token"));
-            });
-        }).build();
-
+    protected void refreshTokenCookies(ServerWebExchange exchange, Map<String, Object> tokenResponse) {
+        MultiValueMap<String, ResponseCookie> cookies = exchange.getResponse().getCookies();
+        cookies.add(ACCESS_TOKEN_COOKIE_NAME, ResponseCookie.from(ACCESS_TOKEN_COOKIE_NAME, (String) tokenResponse.get("access_token"))
+                .path("/")
+                .secure(false)
+                .httpOnly(true)
+                .build());
+        cookies.add(REFRESH_TOKEN_COOKIE_NAME, ResponseCookie.from(REFRESH_TOKEN_COOKIE_NAME, (String) tokenResponse.get("refresh_token"))
+                .path("/")
+                .secure(false)
+                .httpOnly(true)
+                .build());
     }
 
 }
