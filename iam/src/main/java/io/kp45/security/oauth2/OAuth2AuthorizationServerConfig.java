@@ -1,10 +1,9 @@
 package io.kp45.security.oauth2;
 
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import io.kp45.security.jose.Jwks;
+import io.kp45.consul.kv.ConsulKVTemplate;
+import io.kp45.security.jose.ConsulConfigJWKSet;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -54,10 +53,9 @@ public class OAuth2AuthorizationServerConfig {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        RSAKey rsaKey = Jwks.generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+    public JWKSource<SecurityContext> jwkSource(ConsulKVTemplate consulKVTemplate) {
+        ConsulConfigJWKSet consulConfigJWKSet = new ConsulConfigJWKSet(consulKVTemplate);
+        return (jwkSelector, securityContext) -> consulConfigJWKSet.get(jwkSelector, securityContext);
     }
 
     @Bean
