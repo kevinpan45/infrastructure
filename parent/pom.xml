@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>tech.kp45</groupId>
+    <artifactId>dependencies-management</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>kp45-dependencies-management</name>
+
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring.cloud.dependencies.version>2021.0.2</spring.cloud.dependencies.version>
+        <spring.boot.dependencies.version>2.6.7</spring.boot.dependencies.version>
+        <spring.boot.netflix.version>2.2.10.RELEASE</spring.boot.netflix.version>
+        <springdoc-openapi-ui.version>1.6.9</springdoc-openapi-ui.version>
+        <caffeine.version>3.1.0</caffeine.version>
+        <flywaydb.version>8.5.11</flywaydb.version>
+        <mysql.connector.version>8.0.29</mysql.connector.version>
+        <zaxxer.hikaricp.version>5.0.1</zaxxer.hikaricp.version>
+        <baomidou.mybatis.plus.version>3.5.1</baomidou.mybatis.plus.version>
+        <apache.commons.lang3.version>3.12.0</apache.commons.lang3.version>
+        <apache.commons.collections4.version>4.4</apache.commons.collections4.version>
+        <java.version>17</java.version>
+        <mapstruct.version>1.5.1.Final</mapstruct.version>
+        <kp45-basic-framework.version>1.0.1-SNAPSHOT</kp45-basic-framework.version>
+        <jaxb-impl.version>4.0.0</jaxb-impl.version>
+        <jaxb-core.version>4.0.0</jaxb-core.version>
+        <javax.activation.version>1.1.1</javax.activation.version>
+        <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
+        <cn.hutool.version>5.8.3</cn.hutool.version>
+        <flyway.core.version>7.15.0</flyway.core.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.dependencies.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--SpringDoc dependencies -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi-ui.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.dependencies.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Spring cloud hystrix (circuit breaker) -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${spring.boot.netflix.version}</version>
+            </dependency>
+            <!-- Memory cache -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+            <!-- DB migration -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-mysql</artifactId>
+                <version>${flywaydb.version}</version>
+            </dependency>
+            <!-- MySQL JDBC driver -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <!-- JDBC connection pool -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${zaxxer.hikaricp.version}</version>
+            </dependency>
+            <!-- MyBatis ORM framework -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${baomidou.mybatis.plus.version}</version>
+            </dependency>
+            <!-- Apache common utils -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${apache.commons.collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.kp45</groupId>
+                <artifactId>basic-framework</artifactId>
+                <version>${kp45-basic-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${javax.activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${io.jsonwebtoken.jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${cn.hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.core.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-maven-plugin</artifactId>
+                    <version>${flyway.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
