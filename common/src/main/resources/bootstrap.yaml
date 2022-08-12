@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    include: instance
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      enabled: true
+      config:
+        enabled: false
+        format: yaml
+        profile-separator: ':'
+        data-key: data
+        prefixes: config/app,config/service
+        default-context: ${spring.application.name}
+        watch:
+          wait-time: 10
