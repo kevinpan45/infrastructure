@@ -1,4 +1,22 @@
-# Dependencies
+# Usage
+```
+mvn archetype:generate -B \
+-DarchetypeGroupId=io.github.kevinpan45 \
+-DarchetypeArtifactId=[YOUR_PROJECT_NAME] \
+-DarchetypeVersion=1.0.0-SNAPSHOT \
+-DgroupId=io.github.kevinpan45.[YOUR_BASE_PACKAGE_HERE] \
+-DartifactId=[YOUR_PROJECT_NAME_HERE] \
+-Dversion=1.0.0-SNAPSHOT
+```
+
+Sample
+```
+mvn archetype:generate -B -DarchetypeGroupId=io.github.kevinpan45 -DarchetypeArtifactId=test -DarchetypeVersion=1.0.0-SNAPSHOT -DgroupId=io.github.kevinpan45.archetype -DartifactId=test -Dversion=1.0.0-SNAPSHOT
+```
+
+# Design
+
+## Dependencies
 * Language: Java 11
 * Microservice: Spring cloud
 * Discovery and Config: Spring cloud config (Consul)
@@ -11,7 +29,7 @@
 * JSON: Jackson
 * Test: JUnit
 
-# Spec
+## Spec
 * Response
   * Content-type
   * Body
@@ -32,7 +50,7 @@
   * codec
   * spring application context
 
-# Guideline
+## Guideline
 * How to create a springboot project
 * How to use config and use springboot project property
   * Define a variable

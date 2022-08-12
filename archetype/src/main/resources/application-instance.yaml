@@ -1,0 +1,9 @@
+instance:
+  port: <<Instance Port>>
+  name: <<Spring Application Name>>
+  database:
+    host: <<Database Host>>
+    schema: <<Database Schema Name>>
+    port: <<Database Port>>
+    username: <<Database Username>>
+    password: <<Database Password>>
