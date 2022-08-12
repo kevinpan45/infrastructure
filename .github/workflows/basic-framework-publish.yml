@@ -1,9 +1,6 @@
 name: Basic Framwork Publish Maven Package
 
-on:
-  push:
-    paths:
-      - "common"
+on: workflow_dispatch
 
 jobs:
   build:
