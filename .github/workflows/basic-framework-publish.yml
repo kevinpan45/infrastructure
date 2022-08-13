@@ -22,7 +22,7 @@ jobs:
 
     - name: Publish package
       working-directory: "common"
-      run: mvn --batch-mode deploy
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         USERNAME: ${{ github.actor }}
