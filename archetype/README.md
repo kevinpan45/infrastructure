@@ -1,17 +1,28 @@
-# Usage
-```
-mvn archetype:generate -B \
--DarchetypeGroupId=io.github.kevinpan45 \
--DarchetypeArtifactId=[YOUR_PROJECT_NAME] \
--DarchetypeVersion=1.0.0-SNAPSHOT \
--DgroupId=io.github.kevinpan45.[YOUR_BASE_PACKAGE_HERE] \
--DartifactId=[YOUR_PROJECT_NAME_HERE] \
--Dversion=1.0.0-SNAPSHOT
+# Build
+```bash
+# Create
+mvn archetype:create-from-project
+# Deploy to maven repository
+cd target/generated-sources/archetype
+mvn install
 ```
 
-Sample
+# Usage
+```bash
+mvn archetype:generate -B \
+-DarchetypeGroupId=io.github.kevinpan45 \
+-DarchetypeArtifactId=kp45-quickstart-archetype \
+-DarchetypeVersion=1.0.0-SNAPSHOT \
+-DgroupId=[YOUR_BASE_PACKAGE] \
+-DartifactId=[YOUR_PROJECT_NAME] \
+-Dversion=[YOUR_PROJECT_VERSION] -DarchetypeCatalog=local
 ```
-mvn archetype:generate -B -DarchetypeGroupId=io.github.kevinpan45 -DarchetypeArtifactId=test -DarchetypeVersion=1.0.0-SNAPSHOT -DgroupId=io.github.kevinpan45.archetype -DartifactId=test -Dversion=1.0.0-SNAPSHOT
+
+***-DarchetypeCatalog=local arg for archetype has not deploy to Maven Central Repository***
+
+Create project by archetype script sample
+```
+mvn archetype:generate -B -DarchetypeGroupId=io.github.kevinpan45 -DarchetypeArtifactId=kp45-quickstart-archetype -DarchetypeVersion=1.0.0-SNAPSHOT -DgroupId=io.github.kevinpan45 -DartifactId=test -Dversion=0.0.1-SNAPSHOT -DarchetypeCatalog=local
 ```
 
 # Design

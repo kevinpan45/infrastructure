@@ -11,7 +11,7 @@
     <!-- lookup parent from repository -->
   </parent>
   <groupId>io.github.kevinpan45</groupId>
-  <artifactId>archetype</artifactId>
+  <artifactId>kp45-quickstart</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
