@@ -1,5 +1,5 @@
 server:
-  port: 9527
+  port: ${instance.port}
 spring:
   application:
     name: archetype-demo
