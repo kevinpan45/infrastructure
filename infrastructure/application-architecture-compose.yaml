@@ -1,0 +1,33 @@
+version: "3"
+services:
+  application-infrastructure-mysql:
+    container_name: application-infrastructure-mysql
+    image: mysql/mysql-server:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - 3306:3306
+    networks:
+      - application-infrastructure-networks
+    volumes:
+      - /data/infrastructure/application/mysql
+  application-infrastructure-redis:
+    container_name: application-infrastructure-redis
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - application-infrastructure-networks
+  application-infrastructure-registry-config:
+    container_name: application-infrastructure-registry-config
+    image: consul:1.13.1
+    ports:
+      - 8500:8500
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+    networks:
+      - application-infrastructure-networks
+networks:
+  application-infrastructure-networks:
+    driver: bridge
