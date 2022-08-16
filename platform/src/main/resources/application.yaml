@@ -1,0 +1,54 @@
+server:
+  port: ${instance.port:9527}
+spring:
+  application:
+    name: archetype-demo
+  datasource:
+    url: jdbc:mysql://${instance.database.host:localhost}:${instance.database.port:3306}/${instance.database.schema}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${instance.database.username:root}
+    password: ${instance.database.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  messages:
+    basename: i18n/messages/messages
+    encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  flyway:
+    locations:
+      - classpath:db/migration
+    enabled: true
+  cloud:
+    consul:
+      port: 8500
+      host: localhost
+      enabled: true
+      discovery:
+        enabled: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${server.port}
+
+# Log Configuration
+logging:
+  level:
+    root: INFO
+    '[org.springframework.web]': INFO
+  file:
+    name: app.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 10
+
+# Springboot Management Configuration
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: env,health,shutdown,service-registry

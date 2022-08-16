@@ -9,5 +9,5 @@ Microservice infrastructure base on k3s
 - msg: Message service 
 - parent: Basic maven project, only pom.xml, describe common dependencies
 - subscriber: Event subscriber service 
-- system: Platform management
+- platform: Platform management
 - vm-prepare: ECS initial script and code

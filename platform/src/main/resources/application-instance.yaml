@@ -1,0 +1,9 @@
+instance:
+  port: 9527
+  name: platform
+  database:
+    host: localhost
+    schema: platform
+    port: 3306
+    username: root
+    password: 123456
