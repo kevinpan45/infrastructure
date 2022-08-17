@@ -8,7 +8,7 @@
     <!-- lookup parent from repository -->
   </parent>
   <groupId>io.github.kevinpan45</groupId>
-  <artifactId>system</artifactId>
+  <artifactId>platform</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 

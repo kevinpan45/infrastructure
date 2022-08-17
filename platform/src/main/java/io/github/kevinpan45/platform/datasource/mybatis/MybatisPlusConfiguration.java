@@ -1,4 +1,4 @@
-package io.github.kevinpan45.datasource.mybatis;
+package io.github.kevinpan45.platform.datasource.mybatis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
