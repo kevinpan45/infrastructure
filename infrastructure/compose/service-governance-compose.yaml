@@ -1,0 +1,14 @@
+version: "3"
+services:
+  service-governance-consul:
+    container_name: service-governance-consul
+    image: consul:1.13.1
+    ports:
+      - 8500:8500
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+    networks:
+      - service-governance-networks
+networks:
+  service-governance-networks:
+    driver: bridge

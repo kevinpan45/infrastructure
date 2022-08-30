@@ -1,7 +1,7 @@
 version: "3"
 services:
-  application-infrastructure-mysql:
-    container_name: application-infrastructure-mysql
+  middleware-mysql:
+    container_name: middleware-mysql
     image: mysql/mysql-server:8.0.29
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
@@ -9,25 +9,35 @@ services:
     ports:
       - 3306:3306
     networks:
-      - application-infrastructure-networks
+      - middleware-networks
     volumes:
-      - /data/infrastructure/application/mysql
-  application-infrastructure-redis:
-    container_name: application-infrastructure-redis
+      - /data/infrastructure/middleware/mysql
+  middleware-redis:
+    container_name: middleware-redis
     image: redis
     ports:
       - 6379:6379
     networks:
-      - application-infrastructure-networks
-  application-infrastructure-registry-config:
-    container_name: application-infrastructure-registry-config
-    image: consul:1.13.1
+      - middleware-networks
+  middleware-kafka:
+    container_name: middleware-kafka
+    image: per495/kafka:3.1.0
     ports:
-      - 8500:8500
-    environment:
-      CONSUL_BIND_INTERFACE: eth0
+      - 9092:9092
+    restart: on-failure
+    healthcheck:
+      test: bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    entrypoint:
+      - sh
+      - -c
+      - |
+        uuid=$$(bin/kafka-storage.sh random-uuid) && bin/kafka-storage.sh format -t $${uuid} -c config/kraft/server.properties
+        bin/kafka-server-start.sh config/kraft/server.properties
     networks:
-      - application-infrastructure-networks
+      - middleware-networks
 networks:
-  application-infrastructure-networks:
+  middleware-networks:
     driver: bridge
