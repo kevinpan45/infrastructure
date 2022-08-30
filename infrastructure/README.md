@@ -27,7 +27,7 @@ Start Priority
 ### k3s Implementation
 
 ### Docker Compose Implementation
-This implementation is not need IaaS, install Docker and Docker Compose before starting.
+This implementation not need IaaS, install Docker and Docker Compose before starting.
 
 1. Install Docker and Docker Compose
 ```bash
@@ -36,6 +36,6 @@ docker-compose -f application-architecture-compose.yaml up -d
 2. Start service
 
 ```bash
-docker-compose -f middleware-compose.yaml
-
+docker-compose -f ./compose/middleware-compose.yaml
+docker-compose -f ./compose/service-governance-compose.yaml
 ```
