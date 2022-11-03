@@ -4,7 +4,9 @@ on: workflow_dispatch
 
 jobs:
   build:
-
+    defaults:
+      run:
+        working-directory: ./common
     runs-on: ubuntu-latest
     permissions:
       contents: read
