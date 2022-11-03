@@ -1,0 +1,49 @@
+version: "3"
+services:
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/infrastructure/middleware/mysql
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+  kafka:
+    container_name: kafka
+    image: per495/kafka:3.1.0
+    ports:
+      - 9092:9092
+    restart: on-failure
+    healthcheck:
+      test: bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    entrypoint:
+      - sh
+      - -c
+      - |
+        uuid=$$(bin/kafka-storage.sh random-uuid) && bin/kafka-storage.sh format -t $${uuid} -c config/kraft/server.properties
+        bin/kafka-server-start.sh config/kraft/server.properties
+  consul:
+    container_name: consul
+    image: consul:latest
+    ports:
+      - 8500:8500
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+  vault:
+    container_name: vault
+    image: vault:latest
+    ports:
+      - 8200:8200
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_DEV_LISTEN_ADDRESS:
