@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
 jobs:
   publish:
+    defaults:
+      run:
+        working-directory: ./common
     runs-on: ubuntu-latest 
     permissions: 
       contents: read
