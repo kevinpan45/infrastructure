@@ -3,9 +3,6 @@ on:
   workflow_dispatch:
 jobs:
   publish:
-    defaults:
-      run:
-        working-directory: ./common
     runs-on: ubuntu-latest 
     permissions: 
       contents: read
@@ -17,9 +14,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
       - name: Publish package
-        run: mvn deploy
+        working-directory: ./common
+        run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
