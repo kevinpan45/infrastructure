@@ -14,8 +14,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
+          server-id: github
+          server-username: GITHUB_USER_REF
+          server-password: GITHUB_TOKEN_REF
       - name: Publish package
         working-directory: ./common
         run: mvn --batch-mode deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+          GITHUB_USER_REF: ${{ github.actor }}
+          GITHUB_TOKEN_REF: ${{ secrets.PACKAGES_TOKEN }}
