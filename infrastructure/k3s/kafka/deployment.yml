@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+spec:
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: per495/kafka:3.1.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9092
+        command:
+          - sh
+          - -c
+          - |
+            uuid=$(bin/kafka-storage.sh random-uuid) && bin/kafka-storage.sh format -t ${uuid} -c config/kraft/server.properties
+            bin/kafka-server-start.sh config/kraft/server.properties
+        
