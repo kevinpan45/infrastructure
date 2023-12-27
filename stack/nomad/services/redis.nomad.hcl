@@ -3,11 +3,21 @@ job "redis-deploy" {
   type        = "service"
 
   group "redis" {
+    network {
+      port "redis" {
+        static = 6379
+      }
+    }
     count = 1
     task "redis-task" {
       driver = "docker"
       config {
         image = "redis:latest"
+        ports = ["redis"]
+      }
+      resources {
+        cpu    = 500
+        memory = 1024
       }
     }
   }
