@@ -7,12 +7,15 @@ job "rabbitmq-deploy" {
       port "amqp" {
         static = 5672
       }
+      port "ui" {
+        static = 15672
+      }
     }
     task "rabbitmq-task" {
       driver = "docker"
       config {
-        image = "rabbitmq:latest"
-        ports = ["amqp"]
+        image = "rabbitmq:3-management"
+        ports = ["amqp", "ui"]
       }
       resources {
         cpu    = 512

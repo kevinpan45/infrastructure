@@ -30,6 +30,10 @@ job "mysql-deploy" {
           "/data/edge-stack/${NOMAD_JOB_NAME}:/var/lib/mysql"
         ]
       }
+      resources {
+        cpu    = 512
+        memory = 1024
+      }
     }
   }
 }

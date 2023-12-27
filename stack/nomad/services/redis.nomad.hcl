@@ -16,7 +16,7 @@ job "redis-deploy" {
         ports = ["redis"]
       }
       resources {
-        cpu    = 500
+        cpu    = 512
         memory = 1024
       }
     }
