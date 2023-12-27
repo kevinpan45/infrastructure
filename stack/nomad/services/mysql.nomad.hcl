@@ -3,6 +3,18 @@ job "mysql-deploy" {
   type        = "service"
 
   group "mysql" {
+    volume "edge-stack" {
+      type      = "host"
+      source    = "edge-stack"
+      read_only = false
+    }
+
+    network {
+      port "mysql" {
+        static = 3306
+      }
+    }
+
     task "mysql-task" {
       driver = "docker"
 
@@ -13,6 +25,10 @@ job "mysql-deploy" {
 
       config {
         image = "mysql:8.1.0"
+        ports = ["mysql"]
+        volumes = [
+          "/data/edge-stack/${NOMAD_JOB_NAME}:/var/lib/mysql"
+        ]
       }
     }
   }
