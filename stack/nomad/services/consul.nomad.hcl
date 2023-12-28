@@ -1,4 +1,4 @@
-job "consul" {
+job "consul-deploy" {
   datacenters = ["dc1"]
 
   group "consul" {
