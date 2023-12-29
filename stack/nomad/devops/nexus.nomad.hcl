@@ -14,7 +14,7 @@ job "nexus-deploy" {
       }
     }
     count = 1
-    task "redis-task" {
+    task "nexus-task" {
       driver = "docker"
       config {
         image = "sonatype/nexus3"
