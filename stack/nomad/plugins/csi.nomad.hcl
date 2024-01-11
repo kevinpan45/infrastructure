@@ -30,7 +30,7 @@ job "csi-plugin" {
 
         network {
           mbits = 10
-          port  "plugin"{}
+          port "plugin" {}
         }
       }
     }
