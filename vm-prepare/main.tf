@@ -1,18 +1,33 @@
 # Install k3s to a remote host via SSH(Ubuntu 20.04)
+variable "host_ip" {
+  type = string
+}
+
+variable "ssh_user" {
+  type = string
+}
+
+variable "ssh_password" {
+  type = string
+}
+
 resource "null_resource" "init_server" {
   connection {
     type     = "ssh"
-    host     = host_ip
-    user     = ssh_user
-    password = ssh_password
+    host     = var.host_ip
+    user     = var.ssh_user
+    password = var.ssh_password
+  }
+
+  provisioner "file" {
+    source      = "setup.sh"
+    destination = "/tmp/setup.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "apt-get update",
-      "apt-get install -y --no-install-recommends vim git zip unzip wget",
-      "curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun",
-      "curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --docker"
+      "chmod +x /tmp/setup.sh", # Ensure the script is executable
+      "sudo /tmp/setup.sh"      # Run the script
     ]
   }
 }
