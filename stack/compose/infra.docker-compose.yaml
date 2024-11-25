@@ -22,6 +22,8 @@ services:
     image: apache/kafka:3.9.0
     ports:
       - 9092:9092
+    volumes:
+      - /data/local-stack/kafka:/var/lib/kafka/data
     restart: "unless-stopped"
   consul:
     container_name: consul
