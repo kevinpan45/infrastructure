@@ -121,19 +121,3 @@ services:
       - /data/local-stack/homarr/data:/data
       - /data/local-stack/homarr/icons:/app/public/icons
     restart: unless-stopped
-  coder:
-    image: ghcr.io/coder/coder:latest
-    container_name: coder
-    environment:
-      CODER_ACCESS_URL: "http://192.168.31.124:7080"
-      CODER_HTTP_ADDRESS: "0.0.0.0:7080"
-      CODER_PG_CONNECTION_URL: "postgresql://postgres:password@postgres/coder?sslmode=disable"
-    ports:
-      - "7080:7080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    group_add:
-      - 984
-    depends_on:
-      - postgres
-    restart: "unless-stopped"
