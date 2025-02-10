@@ -8,7 +8,7 @@
 - Service Registry & Configuration Center : Consul
 - Database : PGSQL
 - Cache : Redis
-- MQ : EMQX
+- MQ : Kafka
 - Log : MongoDB
 
 ## Script Logic
